@@ -1,0 +1,951 @@
+:root {
+  --background: #fff5f5;
+  --foreground: #4a4a4a;
+  --rose-50: #fff1f2;
+  --purple-50: #faf5ff;
+  --amber-50: #fffbeb;
+  --rose-100: #ffe4e6;
+  --rose-300: #fda4af;
+  --rose-400: #fb7185;
+  --rose-500: #f43f5e;
+  --rose-600: #e11d48;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --purple-200: #e9d5ff;
+  --purple-300: #d8b4fe;
+  --purple-400: #c084fc;
+  --violet-400: #a78bfa;
+  --amber-200: #fde68a;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+  --amber-800: #92400e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+button {
+  font: inherit;
+}
+
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon.filled {
+  fill: currentColor;
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--rose-50), var(--purple-50), var(--amber-50));
+}
+
+.floating-hearts {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -3rem;
+  left: var(--left);
+  color: var(--heart-color);
+  animation: floatingHeart var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+.floating-heart .icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1rem 2rem;
+}
+
+.title-block {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: titleEnter 0.65s ease 0.5s both;
+}
+
+.title-hearts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--rose-400);
+}
+
+.title-hearts .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.title-block h1 {
+  padding: 0 1rem;
+  color: var(--rose-500);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.title-block p {
+  margin-top: 0.5rem;
+  color: rgb(251 113 133 / 0.7);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.jar-button {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  animation: jarEnter 0.9s cubic-bezier(0.2, 0.85, 0.3, 1.25) 0.8s both;
+}
+
+.jar-glow {
+  position: absolute;
+  inset: 0;
+  top: -1rem;
+  left: -1rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, rgb(253 164 175 / 0.4), rgb(216 180 254 / 0.4));
+  filter: blur(64px);
+}
+
+.jar {
+  position: relative;
+  display: block;
+  width: 13rem;
+  height: 15rem;
+}
+
+.lid {
+  position: absolute;
+  z-index: 20;
+  top: -1.25rem;
+  left: 50%;
+  width: 6rem;
+  height: 2rem;
+  transform: translateX(-50%);
+  animation: lidFloat 2s ease-in-out infinite;
+}
+
+.lid-dome {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5rem;
+  border-radius: 1rem 1rem 0 0;
+  background: linear-gradient(to bottom, var(--amber-500), var(--amber-700));
+}
+
+.lid-handle {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  width: 2rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, var(--amber-400), var(--amber-600));
+}
+
+.lid-shine {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.75rem;
+  width: 0.75rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgb(252 211 77 / 0.5);
+  filter: blur(4px);
+}
+
+.jar-body {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  bottom: 3rem;
+  left: 1.5rem;
+}
+
+.jar-back-glow {
+  position: absolute;
+  inset: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(to bottom, rgb(254 205 211 / 0.3), rgb(221 214 254 / 0.3));
+}
+
+.glass {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 0.2);
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.06);
+  backdrop-filter: blur(4px);
+}
+
+.glass-reflection {
+  position: absolute;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.3);
+}
+
+.reflection-one {
+  top: 1.5rem;
+  left: 0.75rem;
+  width: 1.5rem;
+  height: 10rem;
+  filter: blur(12px);
+}
+
+.reflection-two {
+  top: 2rem;
+  right: 0.75rem;
+  width: 0.75rem;
+  height: 5rem;
+  background: rgb(255 255 255 / 0.2);
+  filter: blur(4px);
+}
+
+.jar-notes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.note {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  width: 2.5rem;
+  height: 3rem;
+  border-radius: 0.125rem;
+  background: linear-gradient(135deg, var(--note-from), var(--note-to));
+  box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+  transform: rotate(var(--rotate));
+  animation: noteFloat 2.5s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.note::before,
+.note::after,
+.note span {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  right: 0.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.4);
+}
+
+.note::before {
+  top: 0.75rem;
+}
+
+.note span {
+  top: 1.25rem;
+}
+
+.note::after {
+  top: 1.75rem;
+}
+
+.jar-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 14rem;
+  height: 1.5rem;
+  border-radius: 0 0 1rem 1rem;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, var(--amber-600), var(--amber-800));
+}
+
+.jar-base-shine {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 50%;
+  width: 12rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: rgb(245 158 11 / 0.3);
+  filter: blur(4px);
+}
+
+.tap-indicator {
+  position: absolute;
+  right: -5rem;
+  top: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--rose-500);
+  animation: tapPrompt 1.5s ease-in-out infinite;
+}
+
+.tap-indicator .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.tap-indicator span {
+  color: var(--rose-600);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.progress-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: var(--rose-500);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 1.2s forwards;
+}
+
+.progress-line .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--rose-400);
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay[hidden],
+.confetti-layer[hidden],
+.intro-overlay[hidden] {
+  display: none;
+}
+
+.all-seen-overlay.is-visible,
+.compliment-overlay.is-visible {
+  animation: overlayFade 0.2s ease both;
+}
+
+.all-seen-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(255 228 230 / 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.all-seen-card {
+  position: relative;
+  z-index: 10;
+  margin: 0 1rem;
+  padding: 2.5rem;
+  text-align: center;
+  animation: celebrationEnter 0.55s cubic-bezier(0.2, 0.75, 0.2, 1.25) both;
+}
+
+.all-seen-card .icon-gift {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 1rem;
+  color: var(--rose-500);
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.08));
+}
+
+.all-seen-card h2 {
+  margin-bottom: 0.75rem;
+  color: var(--rose-600);
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.soft-line {
+  margin-bottom: 0.5rem;
+  color: rgb(244 63 94 / 0.8);
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+.truth-line {
+  margin-bottom: 1.5rem;
+  color: var(--rose-600);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+
+.read-again-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.75rem 2rem;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(to right, var(--rose-500), var(--pink-500));
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.read-again-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.mini-sparkle {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--sparkle-color);
+  animation: miniSparkle 1.5s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.gift-wiggle {
+  animation: giftWiggle 2.5s ease-in-out infinite;
+}
+
+.compliment-overlay {
+  padding: 1rem;
+}
+
+.compliment-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(136 19 55 / 0.3);
+  backdrop-filter: blur(12px);
+}
+
+.compliment-card {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  animation: cardEnter 0.5s cubic-bezier(0.2, 0.85, 0.25, 1.2) both;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.5rem;
+  color: white;
+  cursor: pointer;
+  background: rgb(255 255 255 / 0.2);
+  transition: background 0.2s ease;
+}
+
+.close-button:hover {
+  background: rgb(255 255 255 / 0.3);
+}
+
+.close-button .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.sparkle-corner {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  color: rgb(255 255 255 / 0.6);
+}
+
+.sparkle-top {
+  top: -1rem;
+  left: -1rem;
+}
+
+.sparkle-bottom {
+  right: -1rem;
+  bottom: -1rem;
+}
+
+.compliment-emoji {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 3rem;
+  line-height: 1;
+  animation: emojiPop 0.55s cubic-bezier(0.2, 0.85, 0.3, 1.35) 0.2s both;
+}
+
+.compliment-card p {
+  color: white;
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  animation: textRise 0.45s ease 0.3s both;
+}
+
+.modal-heart {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.modal-heart .icon {
+  width: 2rem;
+  height: 2rem;
+  color: rgb(255 255 255 / 0.7);
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 45%;
+  left: var(--left);
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--radius);
+  background: var(--confetti-color);
+  animation: confettiBurst var(--duration) ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--rose-300), var(--purple-200), var(--amber-200));
+}
+
+.intro-overlay.is-leaving {
+  animation: introExit 1.2s ease forwards;
+}
+
+.intro-content {
+  padding: 0 1rem;
+  text-align: center;
+  animation: introContentEnter 1s ease-out both;
+}
+
+.intro-gift-wrap {
+  position: relative;
+}
+
+.intro-gift {
+  margin-bottom: 2rem;
+  animation: introGiftPulse 2s ease-in-out infinite;
+}
+
+.intro-gift .icon {
+  width: 7rem;
+  height: 7rem;
+  margin: 0 auto;
+  color: var(--rose-500);
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.12));
+}
+
+.intro-sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--sparkle-color);
+  animation: introSparkle 1.5s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.intro-content h2 {
+  margin-bottom: 1rem;
+  color: var(--rose-600);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 4px 6px rgb(0 0 0 / 0.12);
+}
+
+.intro-content p {
+  color: rgb(244 63 94 / 0.8);
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+@keyframes floatingHeart {
+  0% {
+    transform: translateY(0) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-58vh) scale(1) rotate(15deg);
+  }
+  75% {
+    transform: translateY(-86vh) scale(1) rotate(-15deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(-100vh - 50px)) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes titleEnter {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes jarEnter {
+  from {
+    transform: scale(0) rotate(-180deg);
+  }
+  to {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes lidFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+@keyframes noteFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(var(--rotate));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--rotate-hover));
+  }
+}
+
+@keyframes tapPrompt {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(8px) scale(1.1);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes celebrationEnter {
+  from {
+    transform: translateY(50px) scale(0.5);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes miniSparkle {
+  0%, 100% {
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes giftWiggle {
+  0%, 80%, 100% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(-5deg);
+  }
+  90% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    transform: translateY(150px) rotate(-8deg) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes emojiPop {
+  from {
+    transform: scale(0) rotate(-180deg);
+  }
+  to {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes textRise {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes confettiBurst {
+  to {
+    transform: translate(var(--travel-x), var(--travel-y)) rotate(var(--spin));
+    opacity: 0;
+  }
+}
+
+@keyframes introExit {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes introContentEnter {
+  from {
+    transform: translateY(50px) scale(0);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes introGiftPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.4) rotate(15deg);
+  }
+  70% {
+    transform: scale(1) rotate(-15deg);
+  }
+}
+
+@keyframes introSparkle {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+  }
+  50% {
+    transform: translate(var(--move-x), var(--move-y)) scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  .floating-heart .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .main-content {
+    padding-top: 7rem;
+  }
+
+  .title-block h1 {
+    font-size: 3rem;
+  }
+
+  .title-block p {
+    font-size: 0.875rem;
+  }
+
+  .jar-glow {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .jar {
+    width: 16rem;
+    height: 18rem;
+  }
+
+  .lid {
+    top: -1.5rem;
+    width: 7rem;
+    height: 2.5rem;
+  }
+
+  .lid-dome {
+    height: 1.5rem;
+  }
+
+  .jar-base {
+    width: 14rem;
+  }
+
+  .tap-indicator {
+    top: 50%;
+    right: -6rem;
+    margin-top: 0;
+    transform: translateY(-50%);
+    animation-name: tapPromptDesktop;
+  }
+
+  .progress-line {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .progress-line .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .compliment-card {
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+  }
+
+  .compliment-emoji {
+    margin-bottom: 1.5rem;
+    font-size: 4.5rem;
+  }
+
+  .compliment-card p {
+    font-size: 1.875rem;
+  }
+
+  .intro-content h2 {
+    font-size: 4.5rem;
+  }
+
+  .intro-content p {
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes tapPromptDesktop {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  50% {
+    transform: translateY(-50%) translateX(8px) scale(1.1);
+  }
+}

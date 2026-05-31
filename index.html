@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You 💕</title>
+    <meta name="description" content="Something special..." />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="icon-heart" viewBox="0 0 24 24">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+      </symbol>
+      <symbol id="icon-gift" viewBox="0 0 24 24">
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5" />
+      </symbol>
+      <symbol id="icon-sparkles" viewBox="0 0 24 24">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z" />
+        <path d="M20 3v4" />
+        <path d="M22 5h-4" />
+        <path d="M4 17v2" />
+        <path d="M5 18H3" />
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </symbol>
+    </svg>
+
+    <main class="page">
+      <div id="floatingHearts" class="floating-hearts" aria-hidden="true"></div>
+
+      <section class="main-content" aria-label="Compliment jar">
+        <div class="title-block">
+          <div class="title-hearts" aria-hidden="true">
+            <svg class="icon icon-heart filled"><use href="#icon-heart"></use></svg>
+            <svg class="icon icon-heart filled"><use href="#icon-heart"></use></svg>
+            <svg class="icon icon-heart filled"><use href="#icon-heart"></use></svg>
+          </div>
+          <h1>SPECIAL JAR FOR PIYU...</h1>
+          <p>a little something just for you...</p>
+        </div>
+
+        <button id="jarButton" class="jar-button" type="button" aria-label="Pull a compliment from the jar">
+          <span class="jar-glow" aria-hidden="true"></span>
+          <span class="jar">
+            <span class="lid" aria-hidden="true">
+              <span class="lid-dome"></span>
+              <span class="lid-handle"></span>
+              <span class="lid-shine"></span>
+            </span>
+
+            <span class="jar-body">
+              <span class="jar-back-glow"></span>
+              <span class="glass">
+                <span class="glass-reflection reflection-one"></span>
+                <span class="glass-reflection reflection-two"></span>
+              </span>
+              <span id="jarNotes" class="jar-notes" aria-hidden="true"></span>
+            </span>
+
+            <span class="jar-base"></span>
+            <span class="jar-base-shine"></span>
+          </span>
+
+          <span class="tap-indicator" aria-hidden="true">
+            <svg class="icon icon-heart filled"><use href="#icon-heart"></use></svg>
+            <span>Tap me!</span>
+          </span>
+        </button>
+
+        <div class="progress-line" aria-live="polite">
+          <svg class="icon icon-heart filled pulse"><use href="#icon-heart"></use></svg>
+          <span id="remainingCount">49 notes waiting for you...</span>
+        </div>
+      </section>
+
+      <div id="allSeenOverlay" class="overlay all-seen-overlay" role="dialog" aria-modal="true" aria-labelledby="allSeenTitle" hidden>
+        <div class="all-seen-backdrop"></div>
+        <div class="all-seen-card">
+          <div id="allSeenSparkles" aria-hidden="true"></div>
+          <div class="gift-wiggle">
+            <svg class="icon icon-gift"><use href="#icon-gift"></use></svg>
+          </div>
+          <h2 id="allSeenTitle">All Done! 🎉</h2>
+          <p class="soft-line">but here's the thing...</p>
+          <p class="truth-line">every single word was 100% true ✨</p>
+          <button id="restartButton" class="read-again-button" type="button">Read Again 💕</button>
+        </div>
+      </div>
+
+      <div id="complimentOverlay" class="overlay compliment-overlay" role="dialog" aria-modal="true" aria-label="Compliment note" hidden>
+        <div class="compliment-backdrop"></div>
+        <article id="complimentCard" class="compliment-card">
+          <button id="closeCompliment" class="close-button" type="button" aria-label="Close compliment">
+            <svg class="icon icon-x"><use href="#icon-x"></use></svg>
+          </button>
+          <svg class="icon icon-sparkles sparkle-corner sparkle-top"><use href="#icon-sparkles"></use></svg>
+          <svg class="icon icon-sparkles sparkle-corner sparkle-bottom"><use href="#icon-sparkles"></use></svg>
+          <div id="complimentEmoji" class="compliment-emoji" aria-hidden="true"></div>
+          <p id="complimentText"></p>
+          <div class="modal-heart" aria-hidden="true">
+            <svg class="icon icon-heart filled"><use href="#icon-heart"></use></svg>
+          </div>
+        </article>
+      </div>
+
+      <div id="confettiLayer" class="confetti-layer" aria-hidden="true" hidden></div>
+
+      <div id="introOverlay" class="intro-overlay" aria-label="For You introduction">
+        <div class="intro-content">
+          <div class="intro-gift-wrap">
+            <div class="intro-gift">
+              <svg class="icon icon-gift"><use href="#icon-gift"></use></svg>
+            </div>
+            <div id="introSparkles" aria-hidden="true"></div>
+          </div>
+          <h2>For You...</h2>
+          <p>something special awaits...</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>
